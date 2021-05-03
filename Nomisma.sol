@@ -9,7 +9,7 @@ contract Nomisma {
   string public constant name;
   string public constant symbol;
   uint8 public constant decimals;
-
+  uint256 public totalSupply = 9001;
 
   // Mapping objects
   mapping(address => uint256) balances;
@@ -18,6 +18,7 @@ contract Nomisma {
   // skeleton functions that must be filled in
 
   function totalSupply() public view returns (uint256){
+    return totalSupply;
   }
 
   function balanceOf(address tokenOwner) public view returns(uint){

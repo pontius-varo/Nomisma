@@ -27,7 +27,8 @@ contract Nomisma {
   }
 
   function allowance(address tokenOwner, address spender) public view returns(uint){
-    //This is here to test my push
+   //returns the amount the spender is allowed to spend on behalf of the tokenOwner
+    return allowed[tokenOwner][spender];
   }
 
   function transfer(address _to, uint _tokens) public returns (bool){

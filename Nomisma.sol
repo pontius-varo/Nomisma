@@ -21,6 +21,8 @@ contract Nomisma {
   }
 
   function balanceOf(address tokenOwner) public view returns(uint){
+    // I want to get the balance of the address from the balances mapping.
+    return balances[tokenOwner];
   }
 
   function allowance(address tokenOwner, address spender) public view returns(uint){

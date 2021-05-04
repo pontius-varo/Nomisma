@@ -38,6 +38,19 @@ contract Nomisma {
   }
 
   function transferFrom(address _from, address _to, uint _tokens) public returns (bool){
+      // `_from` and `_to` cannot be the zero address
+      _transfer(_from, _to, _tokens);
+      
+      // `_from` must have a balance of at least `_tokens`
+      uint256 currentAllowance = allowed[_from][_msgSender()];
+      
+      // the calller must have allowance for ``_from``'s tokens of at least `_tokens`
+      require(currentAllowance >= _tokens, "ERC20: transfer amount exceeds allowance");
+      
+      // deduct `_tokens` from `currentAllowance`
+      _approve(_from, _msgSender(), currentAllowance - _tokens);
+      
+      return true;
   }
 
   // Skeleton events neccessary for the contract

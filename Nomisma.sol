@@ -6,10 +6,17 @@ pragma solidity ^0.8.0;
 
 contract Nomisma {
   // Some variables
+<<<<<<< HEAD
   string public name;
   string public symbol;
   uint8 public decimals;
   uint256 public _totalSupply = 9001;
+=======
+  string public constant name;
+  string public constant symbol;
+  uint8 public constant decimals;
+  uint256 public totalSupply = 9001;
+>>>>>>> 753babc1013a785e724950d737f00183190e6664
 
   // Mapping objects
   mapping(address => uint256) balances;
@@ -18,7 +25,11 @@ contract Nomisma {
   // skeleton functions that must be filled in
 
   function totalSupply() public view returns (uint256){
+<<<<<<< HEAD
     return _totalSupply;
+=======
+    return totalSupply;
+>>>>>>> 753babc1013a785e724950d737f00183190e6664
   }
 
   function balanceOf(address tokenOwner) public view returns(uint){
@@ -27,6 +38,8 @@ contract Nomisma {
   }
 
   function allowance(address tokenOwner, address spender) public view returns(uint){
+   //returns the amount the spender is allowed to spend on behalf of the tokenOwner
+    return allowed[tokenOwner][spender];
   }
 
   function transfer(address _to, uint _tokens) public returns (bool){
@@ -45,10 +58,33 @@ contract Nomisma {
     }      
       
 
-  function approve(address spender, uint _tokens) public returns (bool){
+  /*  Allows an owner to approve another account (delegate) to withdraw tokens from
+  his and transfer them to another/others */
+  function approve(address delegate, uint _numtokens) public returns (bool){
+    // allowed number of tokens being withdrawn by delegate
+    allowed[msg.sender][delegate] = _numtokens;
+
+    // Emits approval as soon as successful
+    emit Approval(msg.sender, delegate, _numtokens)
+
+    // Then returns true
+    return true;
   }
 
   function transferFrom(address _from, address _to, uint _tokens) public returns (bool){
+      // `_from` and `_to` cannot be the zero address
+      _transfer(_from, _to, _tokens);
+
+      // `_from` must have a balance of at least `_tokens`
+      uint256 currentAllowance = allowed[_from][_msgSender()];
+
+      // the caller must have allowance for ``_from``'s tokens of at least `_tokens`
+      require(currentAllowance >= _tokens, "ERC20: transfer amount exceeds allowance");
+
+      // deduct `_tokens` from `currentAllowance`
+      _approve(_from, _msgSender(), currentAllowance - _tokens);
+
+      return true;
   }
 
   // Skeleton events neccessary for the contract

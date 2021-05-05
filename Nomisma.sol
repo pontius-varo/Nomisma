@@ -6,17 +6,10 @@ pragma solidity ^0.8.0;
 
 contract Nomisma {
   // Some variables
-<<<<<<< HEAD
-  string public name;
-  string public symbol;
-  uint8 public decimals;
-  uint256 public _totalSupply = 9001;
-=======
   string public constant name;
   string public constant symbol;
   uint8 public constant decimals;
-  uint256 public totalSupply = 9001;
->>>>>>> 753babc1013a785e724950d737f00183190e6664
+  uint256 public _totalSupply = 9001;
 
   // Mapping objects
   mapping(address => uint256) balances;
@@ -25,11 +18,7 @@ contract Nomisma {
   // skeleton functions that must be filled in
 
   function totalSupply() public view returns (uint256){
-<<<<<<< HEAD
     return _totalSupply;
-=======
-    return totalSupply;
->>>>>>> 753babc1013a785e724950d737f00183190e6664
   }
 
   function balanceOf(address tokenOwner) public view returns(uint){
@@ -65,7 +54,7 @@ contract Nomisma {
     allowed[msg.sender][delegate] = _numtokens;
 
     // Emits approval as soon as successful
-    emit Approval(msg.sender, delegate, _numtokens)
+    emit Approval(msg.sender, delegate, _numtokens);
 
     // Then returns true
     return true;
